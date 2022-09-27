@@ -178,11 +178,9 @@ def test_decode():
 
 def run_tests():
     print('Testing the fit function of the HMM')
-    # test_fit()
+    test_fit()
 
     print('Testing the decode function of the HMM')
     test_decode()
 
     print('Yay! You have a working HMM. Now try creating a pos-tagger using this class.')
-
-run_tests()
