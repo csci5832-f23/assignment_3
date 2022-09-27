@@ -132,7 +132,7 @@ def test_decode():
     test_hmm_tagger.B = np.log([[0.2, 0.5, 0.3], [0.3, 0.1, 0.6]])
 
     test_state_observation_ids = [[[1, 0, 1], [2, 1, 1]]]
-    test_forwards = test_hmm_tagger.path_prob(test_state_observation_ids)
+    test_forwards = test_hmm_tagger.path_log_prob(test_state_observation_ids)
 
     expected_prob = 0.5 * 0.6 * 0.6 * 0.5 * 0.7 * 0.1
 
@@ -148,7 +148,7 @@ def test_decode():
 
     all_state_obs = [[possib, test_observations[0]] for possib in all_possibilities]
 
-    all_forwards = test_hmm_tagger.path_prob(all_state_obs)
+    all_forwards = test_hmm_tagger.path_log_prob(all_state_obs)
 
     best_forward_prob = np.max(all_forwards)
     best_forward = np.argmax(all_forwards)
