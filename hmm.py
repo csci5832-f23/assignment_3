@@ -90,7 +90,7 @@ class HMM:
 
             all_path_log_probs.append(transition_log_probs.sum() + observation_log_probs.sum())
 
-        return np.array(all_forward_log_probs)
+        return np.array(all_path_log_probs)
 
     def decode(self, observation_ids: List[List[int]]) -> List[List[int]]:
         """
@@ -142,7 +142,9 @@ def test_decode():
     test_hmm_tagger.B = np.log([[0.2, 0.5, 0.3], [0.3, 0.1, 0.6]])
 
     test_state_observation_ids = [[[1, 0, 1], [2, 1, 1]]]
-    test_forwards = test_hmm_tagger.path_log_prob(test_state_observation_ids)
+    test_state_ids = [[1, 0, 1]]
+    test_obs_ids = [[2, 1, 1]]
+    test_forwards = test_hmm_tagger.path_log_prob(test_state_ids, test_obs_ids)
 
     expected_prob = 0.5 * 0.6 * 0.6 * 0.5 * 0.7 * 0.1
 
@@ -156,9 +158,9 @@ def test_decode():
 
     all_possibilities = [[s1, s2, s3] for s1 in range(2) for s2 in range(2) for s3 in range(2)]
 
-    all_state_obs = [[possib, test_observations[0]] for possib in all_possibilities]
+    all_observations = test_observations * len(all_possibilities)
 
-    all_forwards = test_hmm_tagger.path_log_prob(all_state_obs)
+    all_forwards = test_hmm_tagger.path_log_prob(all_possibilities, all_observations)
 
     best_forward_prob = np.max(all_forwards)
     best_forward = np.argmax(all_forwards)
@@ -176,9 +178,11 @@ def test_decode():
 
 def run_tests():
     print('Testing the fit function of the HMM')
-    test_fit()
+    # test_fit()
 
     print('Testing the decode function of the HMM')
     test_decode()
 
     print('Yay! You have a working HMM. Now try creating a pos-tagger using this class.')
+
+run_tests()
