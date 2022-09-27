@@ -2,6 +2,7 @@ import nltk
 from nltk.corpus import indian
 import numpy as np
 import random
+from typing import List
 
 nltk.download('indian')
 
@@ -91,13 +92,22 @@ class HMM:
 
         return np.array(all_forward_log_probs)
 
-    def decode(self, observation_ids: list[list[int]]) -> list[list[int]]:
+    def decode(self, observation_ids: List[List[int]]) -> List[List[int]]:
         """
         ENTER CODE HERE: complete the code
         Viterbi Algorithm: Follow the algorithm in Jim's book:
         Figure 8.10 at https://web.stanford.edu/~jurafsky/slp3/8.pdf
         """
-        raise NotImplementedError
+        # store the decoded states here
+        all_predictions = []
+        for obs_ids in observation_ids:
+            T = len(obs_ids)  # Sequence length
+            viterbi = np.zeros((self.n, T))  # The viterbi table
+            back_pointer = np.zeros((self.n, T))   # backpointers for each state+sequence id
+            # TODO: Fill the viterbi table, back_pointer. Get the optimal sequence by backtracking
+            ...
+            raise NotImplementedError
+        return all_predictions
 
 
 def test_fit():
