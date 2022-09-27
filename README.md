@@ -7,6 +7,7 @@
     - Run the cells in [HMM POS.ipynb](HMM&#32;POS.ipynb)
 
 - Task B: Named Entity Recognition using Conditional Random Field on Hindi Dataset (Total: 60 Points out of 100)
+    - TBA
 
 
 ## Submission
