@@ -101,6 +101,10 @@ class HMM:
 
 
 def test_fit():
+    # Assume a set of observations: {0, 1, 2} and set of states {0, 1}
+    test_n = 2
+    test_m = 3
+
     test_hmm_fit = HMM(test_n, test_m)
 
     train_states = [[0, 1, 1], [1, 0, 1], [0, 0, 1]]
@@ -122,7 +126,7 @@ def test_decode():
     test_n = 2
     test_m = 3
 
-    test_hmm_tagger = MyHMM(test_n, test_m)
+    test_hmm_tagger = HMM(test_n, test_m)
     test_hmm_tagger.pi = np.log([0.5, 0.5])
     test_hmm_tagger.A = np.log([[0.3, 0.7], [0.6, 0.4]])
     test_hmm_tagger.B = np.log([[0.2, 0.5, 0.3], [0.3, 0.1, 0.6]])
