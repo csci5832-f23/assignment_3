@@ -183,26 +183,42 @@ def test_decode():
     assert np.round(predicted_forward, 4) == expected_prob
 
     ### TEST Viterbi Decoding Method ###
-
-    test_observations = [[2, 1, 1]]
-
-    all_possibilities = [[s1, s2, s3] for s1 in range(2) for s2 in range(2) for s3 in range(2)]
-
-    all_observations = test_observations * len(all_possibilities)
-
-    all_forwards = test_hmm_tagger.path_log_prob(all_possibilities, all_observations)
-
-    best_forward_prob = np.max(all_forwards)
-    best_forward_index = np.argmax(all_forwards)
-    best_path_true = all_possibilities[best_forward_index]
-
-    decoded_states = test_hmm_tagger.decode(test_observations)
+    import itertools
     
-    # Test the first and last states of the decoded states
-    assert decoded_states[0][0] == best_path_true[0]
-    assert decoded_states[0][-1] == best_path_true[-1]
-    assert len(decoded_states[0]) == len(best_path_true)
+    def brute_force(test_obs, n):
+        T = len(test_obs)
+        state_s = list(range(n))
+        all_possibs = list(itertools.product(state_s, repeat=T))
+        all_obs = [test_obs] * len(all_possibs)
+        all_forwards = test_hmm_tagger.path_log_prob(all_possibs, all_obs)
+        best_index = np.argmax(all_forwards)
+        best_path_true = all_possibs[best_index]
+        return best_path_true
+
+    test_observations = [2, 1, 1]
+
+    bp_true = brute_force(test_observations, 2)
+
+    decoded_states = test_hmm_tagger.decode([test_observations])
     
+    assert tuple(decoded_states[0]) == bp_true
+
+    test_observations = [1, 1, 1]
+
+    bp_true = brute_force(test_observations, 2)
+
+    decoded_states = test_hmm_tagger.decode([test_observations])
+
+    assert tuple(decoded_states[0]) == bp_true
+
+    test_observations = [1, 1, 2]
+
+    bp_true = brute_force(test_observations, 2)
+
+    decoded_states = test_hmm_tagger.decode([test_observations])
+
+    assert tuple(decoded_states[0]) == bp_true
+
     print('All Test Cases Passed!')
 
 
