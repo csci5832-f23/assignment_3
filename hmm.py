@@ -127,7 +127,37 @@ def test_fit():
     assert np.round(np.exp(test_hmm_fit.A)[0, 1], 2) == 0.75
 
     assert np.round(np.exp(test_hmm_fit.B)[1, 0], 1) == 0.6
+    
+    ## Smarter test case 1
 
+    observations1 = [0]*3 + [1]*2 + [3]*1 + [4]*1 + [5]*2
+
+    observations = observations1 * 4
+
+    train_states = [0]*len(observations1) + [1]*len(observations1) + [2]*len(observations1) + [3]*len(observations1)
+
+    test_hmm_2 = HMM(4, 6)
+
+    test_hmm_2.fit([train_states], [observations])
+
+    assert np.round(np.exp(test_hmm_2.B[0, 1]), 2) == 0.22
+    assert np.round(np.exp(test_hmm_2.B[0, 0]), 2) == 0.33
+    assert np.round(np.exp(test_hmm_2.B[0, -1]), 2) == 0.22
+
+    assert np.sum(test_hmm_2.B[0] == test_hmm_2.B[1]) == 6
+    assert np.sum(test_hmm_2.B[1] == test_hmm_2.B[2]) == 6
+
+    ## Smarter test case 2
+
+    train_states = [0, 1, 1, 2, 4, 3, 2, 1, 3, 4] * 4
+    observations = [1, 0, 1, 1, 1, 4, 2, 3, 4, 1] * 4
+
+    test_hmm_3 = HMM(5, 5)
+    test_hmm_3.fit([train_states], [observations])
+
+    assert np.round(np.exp(test_hmm_3.A), 2)[4, 0] == 0.43
+    assert np.round(np.exp(test_hmm_3.A), 2)[2, 4] == 0.5
+    
     print('All Test Cases Passed!')
 
 
