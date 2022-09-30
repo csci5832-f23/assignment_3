@@ -65,10 +65,15 @@ class HMM:
         """
         for s_ids, o_ids in zip(state_ids, observation_ids):
             # count initial states
+            self.pi[s_ids[0]] += 1
             # count state->state transitions
+            for prev, curr in zip(s_ids[:-1], s_ids[1:]):
+                self.A[prev, curr] += 1
             # count state->observations emissions
+            for s_id, o_id in zip(s_ids, o_ids): 
+                self.B[s_id, o_id] += 1
             # HINT: use zip for creating bi-grams
-            raise NotImplementedError
+            # raise NotImplementedError
 
         # normalize the rows of each probability matrix
         self.pi = np.log(self.pi / np.sum(self.pi))
@@ -105,8 +110,18 @@ class HMM:
             viterbi = np.zeros((self.n, T))  # The viterbi table
             back_pointer = np.zeros((self.n, T))   # backpointers for each state+sequence id
             # TODO: Fill the viterbi table, back_pointer. Get the optimal sequence by backtracking
-            ...
-            raise NotImplementedError
+            viterbi[:, 0] = self.pi + self.B[:, obs_ids[0]] 
+            for t in range(1, T): 
+                for j in range(self.n): 
+                    possibilities = [viterbi[i, t-1] + self.A[i, j] + self.B[j, obs_ids[t]] for i in range(self.n)]
+                    viterbi[j, t] = np.max(possibilities) 
+                    back_pointer[j, t] = np.where(possibilities==np.max(possibilities))[0][0] 
+            prediction = [int(np.where(viterbi[:,T-1]==np.max(viterbi[:,T-1]))[0][0])] 
+            for t in reversed(range(1, T)): 
+                prediction.insert(0, int(back_pointer[prediction[0], t]))
+            all_predictions.append(prediction)
+            # ...
+            # raise NotImplementedError
         return all_predictions
 
 
