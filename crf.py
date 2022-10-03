@@ -1,7 +1,7 @@
 from typing import Dict, List, Set, Tuple
 
 import torch
-from TorchCRF import CRF as CRFDecoder
+from torchcrf import CRF as CRFDecoder
 from tqdm import tqdm
 import random
 
