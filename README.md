@@ -37,4 +37,5 @@
 
 ## Submission
 
-TBA
+ - Due Date: 11 October, 2022 11:59 pm MT
+ - Format: One merged PDF with the output of [HMM POS.ipynb](HMM&#32;PoS.ipynb), [CRF.ipynb](CRF.ipynb) and Written Assignment
