@@ -56,8 +56,13 @@ class HMM:
         self.A = np.zeros((num_states, num_states)) + 0.0000000001
         self.B = np.zeros((num_states, num_observations)) + 0.0000000001
 
-    def fit(self, state_ids, observation_ids):
+    def fit(self, state_ids: List[List[int]], observation_ids: List[List[int]]):
         """
+        There is a one-to-one mapping between each element of state_ids and observations_ids
+        
+        state_ids: The list of list of tag ids of the tokens of the sentences
+        observations_ids: The list of list of word ids of the tokens of the sentences
+        
         ENTER CODE HERE: complete the code
         populate the parameters (self.pi, self.A, self.B) by counting the bi-grams
         for self.A use bi-grams of states and states
@@ -75,8 +80,13 @@ class HMM:
         self.A = np.log(self.A / np.sum(self.A, axis=1).reshape((-1, 1)))
         self.B = np.log(self.B / np.sum(self.B, axis=1).reshape((-1, 1)))
 
-    def path_log_prob(self, state_ids, observation_ids) -> np.array:
+    def path_log_prob(self, state_ids: List[List[int]], observation_ids: List[List[int]]) -> np.array:
         """
+        There is a one-to-one mapping between each element of state_ids and observations_ids
+        
+        state_ids: The list of list of tag ids of the tokens of the sentences
+        observations_ids: The list of list of word ids of the tokens of the sentences
+        
         A debugging helper function to calculate the path probability of a given sequence of states and observations
         """
         all_path_log_probs = []
