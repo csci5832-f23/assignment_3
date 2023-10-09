@@ -28,7 +28,7 @@ def load_data(
     tag_sents = []
     token_sent = []
     tag_sent = []
-    with open(filepath, "r") as f:
+    with open(filepath, "r", encoding='utf-8') as f:
         for line in f:
             # Newline indicates a new sentence.
             if not line.rstrip():
