@@ -6,11 +6,11 @@
 
  - Create a new conda environment (in the Terminal):
 
-    `conda create --name py39 python=3.9`
+    `conda create --name pya3 python=3.9`
     
  - Activate the environment:
 
-     `conda activate py39`
+     `conda activate pya3`
 
 ## Getting Started
 
