@@ -16,7 +16,7 @@
 
   - Clone the repo, Enter the assignment directory. **Please do not fork the repo!!**
      
-      ` git clone https://github.com/csci5832-f22/assignment_3.git `
+      ` git clone https://github.com/csci5832-f23/assignment_3.git `
       
       ` cd assignment_3 `
         
