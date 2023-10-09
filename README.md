@@ -14,7 +14,7 @@
 
 ## Getting Started
 
-  - Clone the repo, Enter the assignment directory
+  - Clone the repo, Enter the assignment directory. **Please do not fork the repo!!**
      
       ` git clone https://github.com/csci5832-f22/assignment_3.git `
       
@@ -38,4 +38,4 @@
 ## Submission
 
  - Due Date: TBA
- - Format: One merged PDF with the output of [HMM POS.ipynb](HMM&#32;PoS.ipynb), [CRF.ipynb](CRF.ipynb) and [Written Assignment](WrittenAssignmentTemplate.ipynb)
+ - Format: **Single merged PDF** with the outputs of [HMM POS.ipynb](HMM&#32;PoS.ipynb), [CRF.ipynb](CRF.ipynb), and [Written Assignment](WrittenAssignmentTemplate.ipynb)
