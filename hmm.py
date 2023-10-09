@@ -240,3 +240,7 @@ def run_tests():
     test_decode()
 
     print('Yay! You have a working HMM. Now try creating a pos-tagger using this class.')
+
+
+if __name__ == "__main__":
+    run_tests()
